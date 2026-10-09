@@ -38,3 +38,7 @@ SWITCHBOARD_ROOT=../switchboard npm run integration
 Tests use copied plugins, fixture HTTP responses and snapshots of the actual Switchboard authentication helpers. The optional integration check requires Switchboard's installed dependencies and uses its actual plugin manager and GitHub installer with a temporary database and local archive. It verifies installation, migration, restart and individual-folder installs without accessing a running instance or contacting Atlassian.
 
 CI runs syntax/manifest checks and fixture tests on Node 24. Live authentication and provider writes have not been exercised. OpenAI Codex wrote the new code, tests and documentation at Thomas de Ruiter's request; Jira and Confluence were extracted from Switchboard.
+
+## Releases
+
+Release-please opens version and changelog pull requests from Conventional Commits. Merge the release PR to publish its tag and GitHub release. Plugin manifests are updated with their package versions. Family repositories maintain an independent version for each plugin.
