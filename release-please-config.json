@@ -12,7 +12,8 @@
           "path": "plugin.json",
           "jsonpath": "$.version"
         }
-      ]
+      ],
+      "initial-version": "1.0.0"
     },
     "plugins/bitbucket": {
       "release-type": "node",
@@ -24,7 +25,8 @@
           "path": "plugin.json",
           "jsonpath": "$.version"
         }
-      ]
+      ],
+      "initial-version": "1.0.0"
     }
   }
 }
