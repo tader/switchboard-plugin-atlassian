@@ -1,12 +1,23 @@
 {
   "id": "bitbucket",
   "name": "Bitbucket",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Repositories, pull requests and pipelines in Bitbucket Cloud, and repositories and pull requests on Data Center.",
-  "dependencies": ["oauth2", "api-key"],
+  "dependencies": [
+    "oauth2",
+    "api-key"
+  ],
   "icon": "icon.svg",
   "settings": [
-    { "key": "clientId", "label": "OAuth consumer key", "description": "From a Bitbucket Cloud workspace OAuth consumer. Configure its permissions and Switchboard callback URL in Bitbucket." },
-    { "key": "clientSecret", "label": "OAuth consumer secret", "type": "secret" }
+    {
+      "key": "clientId",
+      "label": "OAuth consumer key",
+      "description": "From a Bitbucket Cloud workspace OAuth consumer. Configure its permissions and Switchboard callback URL in Bitbucket."
+    },
+    {
+      "key": "clientSecret",
+      "label": "OAuth consumer secret",
+      "type": "secret"
+    }
   ]
 }
