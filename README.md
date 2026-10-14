@@ -42,3 +42,9 @@ CI runs syntax/manifest checks and fixture tests on Node 24. Live authentication
 ## Releases
 
 Release-please opens version and changelog pull requests from Conventional Commits. Merge the release PR to publish its tag and GitHub release. Plugin manifests are updated with their package versions. Family repositories maintain an independent version for each plugin.
+
+## Reusable credentials
+
+With Switchboard's reusable-credentials support and updated API-key helper, Jira and Confluence API-token/PAT connections can reference one named credential. Select **Manage credentials** on a connection to promote its stored secret, then select that credential for the other connection. The secret never needs to be retrieved or pasted again.
+
+Rotation updates all linked connections together. Deleting one connection does not revoke the shared credential. Destination approval is explicit, and changes to configured destinations require relinking. API-token bundles retain both the email and token; PAT bundles retain the bearer token. OAuth sign-in stays independent until its provider-specific request policy supports safe reuse.
