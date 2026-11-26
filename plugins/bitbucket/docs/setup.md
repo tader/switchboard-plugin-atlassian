@@ -17,6 +17,8 @@ An administrator creates a Bitbucket workspace OAuth consumer and registers `{{c
 
 Cloud requests use `https://api.bitbucket.org/2.0`. For example, request `/repositories/{workspace}/{repo_slug}/pullrequests` or `/repositories/{workspace}/{repo_slug}/pipelines/`. Follow the returned pagination links. Switchboard exposes the published Cloud API specification. API host permissions are restricted to `api.bitbucket.org`.
 
+With activity previews enabled on a compatible Switchboard host, an audited, query-free `GET https://api.bitbucket.org/2.0/user` with Cloud OAuth or an API token can retain only the response's top-level resource `type` string, up to 32 UTF-8 bytes. Account details, other Bitbucket routes, Data Center personal access tokens, Jira and Confluence have no response preview. See the [Bitbucket Cloud user schema](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-users/#api-user-get).
+
 ## Data Center and Server
 
 Choose **Personal access token**, enter the server URL (including any context path), a personal HTTP token with repository read permission and an optional account label. Validation reads one page of the authenticated pull-request inbox. It does not infer your identity from public user records, so the account label is user-supplied rather than a verified user name. Repository/project automation tokens are not supported by this personal-token method.

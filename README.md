@@ -33,9 +33,12 @@ See the [Jira and Confluence guide](plugins/atlassian/docs/setup.md) and [Bitbuc
 npm run check
 npm test
 SWITCHBOARD_ROOT=../switchboard npm run integration
+SWITCHBOARD_ROOT=../switchboard node scripts/output-preview-integration.js
 ```
 
 Tests use copied plugins, fixture HTTP responses and snapshots of the actual Switchboard authentication helpers. The optional integration check requires Switchboard's installed dependencies and uses its actual plugin manager and GitHub installer with a temporary database and local archive. It verifies installation, migration, restart and individual-folder installs without accessing a running instance or contacting Atlassian.
+
+The activity preview fixture uses Switchboard v0.17.0 with installed dependencies, a temporary database and isolated preview storage. It exercises both Bitbucket Cloud auth methods and the Data Center, Jira and Confluence exclusions with synthetic responses.
 
 CI runs syntax/manifest checks and fixture tests on Node 24. Live authentication and provider writes have not been exercised. OpenAI Codex wrote the new code, tests and documentation at Thomas de Ruiter's request; Jira and Confluence were extracted from Switchboard.
 
