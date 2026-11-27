@@ -1,4 +1,4 @@
-import type { AccountInfo, Connection, PluginContext } from './api.ts';
+import type { AccountInfo, Connection, PluginContext, PluginInstance } from './api.ts';
 import type * as OAuth2 from './oauth2.d.ts';
 import type * as ApiKey from './api-key.d.ts';
 
@@ -37,7 +37,7 @@ async function cloudAccount(authorization: string): Promise<AccountInfo> {
   return { id: user.uuid, label: user.display_name ?? user.nickname ?? user.uuid, avatarUrl: user.links?.avatar?.href };
 }
 
-export default function setup(ctx: PluginContext) {
+export default function setup(ctx: PluginContext): PluginInstance {
   const oauth = ctx.require<typeof OAuth2>('oauth2');
   const apiKey = ctx.require<typeof ApiKey>('api-key');
   const configured = !!(ctx.settings.clientId && ctx.settings.clientSecret);
@@ -51,6 +51,13 @@ export default function setup(ctx: PluginContext) {
       docsUrl: 'https://developer.atlassian.com/cloud/bitbucket/rest/',
       baseUrl: (conn: Connection) => isServer(conn) ? serverUrl(conn.config.site) : CLOUD,
       allowedHosts: (conn: Connection) => isServer(conn) ? [new URL(serverUrl(conn.config.site)).host] : ['api.bitbucket.org'],
+      outputPreviews: [{
+        origin: 'https://api.bitbucket.org',
+        method: 'GET',
+        path: '/2.0/user',
+        authMethods: ['oauth', 'api-token'],
+        fields: { type: { maxBytes: 32 } },
+      }],
       openapi: (conn: Connection) => isServer(conn) ? undefined : SPEC,
       authMethods: [
         oauth.authorizationCode({

@@ -52,7 +52,8 @@ try {
   manager = (await load('plugins/manager.ts')).plugins;
   await manager.start();
   const github = await load('plugins/github.ts');
-  const ids = await github.install({ repo: 'tader/switchboard-plugin-atlassian' });
+  const repository = { repo: 'tader/switchboard-plugin-atlassian', ref: 'HEAD' };
+  const ids = await github.install(repository);
   assert.deepEqual(ids.sort(), ['atlassian', 'bitbucket']);
   for (const id of ids) {
     assert.equal(manager.get(id).status, 'active', manager.get(id).error);
@@ -73,7 +74,7 @@ try {
   assert.equal(manager.service('jira').authMethods.find(m => m.id === 'oauth').unavailable, undefined);
   for (const id of ids) await github.uninstall(id);
   for (const id of ids) {
-    const one = await github.install({ repo: 'tader/switchboard-plugin-atlassian', path: `plugins/${id}` });
+    const one = await github.install({ ...repository, path: `plugins/${id}` });
     assert.deepEqual(one, [id]);
     assert.equal(manager.get(id).status, 'active');
     await github.uninstall(id);
